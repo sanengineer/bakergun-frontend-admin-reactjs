@@ -12,6 +12,7 @@ class App extends Component {
   state = {
     user: {},
     users: [],
+    searchUsername: {},
     numberOfUsers: 0,
   };
 
@@ -41,6 +42,19 @@ class App extends Component {
 
     this.setState({ user });
   };
+
+  searchUsername() {
+    searchByUsername(this.state.searchUsername)
+      .then((response) => {
+        this.setState({
+          searchUsername: response.data,
+        });
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
   render() {
     return (

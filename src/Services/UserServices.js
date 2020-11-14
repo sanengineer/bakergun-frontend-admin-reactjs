@@ -18,9 +18,3 @@ export const createUser = async (data) => {
 
   return await response.json();
 };
-
-export const searchByUsername = async(username) {
-
-    const response = await fetch(`${urlAdmin}/user-game?username=${username}`)
-
-}
