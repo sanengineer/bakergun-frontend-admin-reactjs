@@ -4,15 +4,20 @@ import { Users } from "./Components/Users";
 import { DisplayBoard } from "./Components/DisplayBoard";
 import { SearchBoard } from "./Components/SearchBoard";
 import CreateUser from "./Components/CreateUser";
-import { getAllUsers, createUser } from "./Services/UserServices";
+import {
+  getAllUsers,
+  createUser,
+  searchByUsername,
+} from "./Services/UserServices";
 
 import "./assets/scss/style.scss";
+import { UsersBySearch } from "./Components/UsersBySearch";
 
 class App extends Component {
   state = {
     user: {},
     users: [],
-    searchUsername: {},
+    searchUsername: "",
     numberOfUsers: 0,
   };
 
@@ -30,8 +35,24 @@ class App extends Component {
     });
   };
 
+  searchByUsername = (e) => {
+    // if (e.target.value === this.state.searchUsername) {
+    searchByUsername()
+      .then((searchUsername) => {
+        console.log("App.js - SearchByUsername: ", searchUsername);
+        this.setState({
+          searchUsername: this.state.searchUsername,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    // }
+  };
+
   onChangeForm = (e) => {
     let user = this.state.user;
+
     if (e.target.name === "username") {
       user.username = e.target.value;
     } else if (e.target.name === "email") {
@@ -41,20 +62,22 @@ class App extends Component {
     }
 
     this.setState({ user });
+
+    console.log("onChangeForm: ", user);
   };
 
-  searchUsername() {
-    searchByUsername(this.state.searchUsername)
-      .then((response) => {
-        this.setState({
-          searchUsername: response.data,
-        });
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
+  onChangeSearchUsername = (e) => {
+    let searchUsername = e.target.value;
+
+    if (e.target.name === "username") {
+      this.setState({
+        searchUsername: e.target.value,
       });
-  }
+      // searchUsername: e.target.value;
+    }
+
+    console.log("onChangeSearchUsername: ", searchUsername);
+  };
 
   render() {
     return (
@@ -74,12 +97,18 @@ class App extends Component {
                 numberOfUsers={this.state.numberOfUsers}
                 getAllUsers={this.getAllUsers}
               ></DisplayBoard>
-              <SearchBoard></SearchBoard>
+              <SearchBoard
+                onChangeSearchUsername={this.onChangeSearchUsername}
+                searchByUsername={this.searchByUsername}
+              ></SearchBoard>
             </div>
           </div>
         </div>
         <div className="container container-lg mt-5">
           <Users users={this.state.users}></Users>
+          <UsersBySearch
+            searchUsername={this.state.searchUsername}
+          ></UsersBySearch>
         </div>
       </div>
     );

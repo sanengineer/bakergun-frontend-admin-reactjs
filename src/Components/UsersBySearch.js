@@ -1,8 +1,8 @@
 import React from "react";
 
-export const Users = ({ users }) => {
-  console.log("users length:::", users.length);
-  if (users.length === 0) return null;
+export const UsersBySearch = ({ searchUsername }) => {
+  console.log("searchUsername length:::", searchUsername.length);
+  if (searchUsername.length === 0) return null;
 
   const UserRow = (user) => {
     return (
@@ -18,12 +18,15 @@ export const Users = ({ users }) => {
     );
   };
 
-  const userTable = users.map((user) => UserRow(user));
+  const userTable = searchUsername.map((user) => UserRow(user));
+
+  console.log("userTable: ", userTable);
+  console.log("UserRow - UserBySearch.js :", UserRow);
 
   return (
     <div className="row">
       <div className="col-md-12"></div>
-      <h2>Users Game</h2>
+      <h2>Result Search Users Game By Username</h2>
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -37,4 +40,6 @@ export const Users = ({ users }) => {
       </table>
     </div>
   );
+
+  // return null;
 };
