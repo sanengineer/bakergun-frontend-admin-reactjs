@@ -1,7 +1,7 @@
 import React from "react";
 
 export const Users = ({ users }) => {
-  console.log("users length:::", users.length);
+  console.log("Users.js_users length:::", users.length);
   if (users.length === 0) return null;
 
   const UserRow = (user) => {

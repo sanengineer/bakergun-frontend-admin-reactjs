@@ -13,11 +13,12 @@ import {
 import "./assets/scss/style.scss";
 import { UsersBySearch } from "./Components/UsersBySearch";
 
+
 class App extends Component {
   state = {
     user: {},
     users: [],
-    searchUsername: "",
+    searchUsername: [],
     numberOfUsers: 0,
   };
 
@@ -49,6 +50,15 @@ class App extends Component {
       });
     // }
   };
+
+  getAllUsersBySearch = () => {
+
+    let searchUsername = this.state.searchUsername
+
+    this.setState({searchUsername})
+
+    console.log("App.js_getAllUsersBySearch: ",searchUsername)
+  }
 
   onChangeForm = (e) => {
     let user = this.state.user;
@@ -105,10 +115,9 @@ class App extends Component {
           </div>
         </div>
         <div className="container container-lg mt-5">
-          <Users users={this.state.users}></Users>
-          <UsersBySearch
-            searchUsername={this.state.searchUsername}
-          ></UsersBySearch>
+          <Users users={this.state.users}></Users>{
+            searchByUsername() === 0 ?  null : <UsersBySearch searchUsername={this.state.searchUsername}></UsersBySearch> 
+          }
         </div>
       </div>
     );

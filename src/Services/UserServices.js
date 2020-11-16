@@ -32,4 +32,17 @@ export const searchByUsername = async (searchUsername) => {
   );
 
   return await response.json();
+
+  // await fetch(
+  //   `${urlAdmin}/user-game?username=${searchUsername}`
+  // ).then(response => {
+  //   if (response.status === 200) {
+  //     console.log("UserService.js_searchByUsername_response: ", response);
+  //     console.log(
+  //       "UserService.js_searchByUsername_searchUsername: ",
+  //       searchUsername
+  //     );
+  //     return response.json();
+  //   }
+  // });
 };

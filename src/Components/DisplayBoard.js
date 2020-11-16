@@ -1,6 +1,6 @@
 import React from "react";
 
-export const DisplayBoard = ({ numberOfUsers, getAllUsers }) => {
+export const DisplayBoard = ({ numberOfUsers, getAllUsers, getAllUsersBySearch }) => {
   return (
     <div
       className="card"
@@ -25,6 +25,13 @@ export const DisplayBoard = ({ numberOfUsers, getAllUsers }) => {
             className="btn btn-warning"
           >
             Get all Users
+          </button>
+          <button
+            type="button"
+            onClick={(e) => getAllUsersBySearch()}
+            className="btn btn-success mt-3"
+          >
+            Get All Users By Search
           </button>
         </div>
       </div>
