@@ -23,7 +23,7 @@ class App extends Component {
 
   createUser = (e) => {
     createUser(this.state.user).then((response) => {
-      console.log(response);
+      console.log("App.js_createUser: ", response);
       this.setState({ numberOfUsers: this.state.numberOfUsers + 1 });
     });
   };
@@ -37,12 +37,12 @@ class App extends Component {
 
   searchByUsername = (e) => {
     // if (e.target.value === this.state.searchUsername) {
-    searchByUsername()
+    searchByUsername(this.state.searchUsername)
       .then((searchUsername) => {
-        console.log("App.js - SearchByUsername: ", searchUsername);
         this.setState({
           searchUsername: this.state.searchUsername,
         });
+        console.log("App.js_SearchByUsername: ", searchUsername);
       })
       .catch((e) => {
         console.log(e);
@@ -63,20 +63,20 @@ class App extends Component {
 
     this.setState({ user });
 
-    console.log("onChangeForm: ", user);
+    console.log("App.js_onChangeForm: ", user);
   };
 
   onChangeSearchUsername = (e) => {
     let searchUsername = e.target.value;
 
     if (e.target.name === "username") {
+      // e.preventDefault();
       this.setState({
-        searchUsername: e.target.value,
+        searchUsername: searchUsername,
       });
-      // searchUsername: e.target.value;
     }
 
-    console.log("onChangeSearchUsername: ", searchUsername);
+    console.log("App.js_onChangeSearchUsername: ", searchUsername);
   };
 
   render() {

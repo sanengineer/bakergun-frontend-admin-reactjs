@@ -8,9 +8,11 @@ export const SearchBoard = ({ searchByUsername, onChangeSearchUsername }) => {
           <input
             type="search"
             className="form-control ds-input p-2"
-            name="username"
             id="search"
+            name="username"
             placeholder="type here..."
+            // value={searchUsername}
+            // onChange={onChangeSearchUsername}
             onChange={(e) => onChangeSearchUsername(e)}
           />
         </div>

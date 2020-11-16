@@ -4,6 +4,7 @@ const urlAdmin = "http://localhost:8080/admin-api/v1";
 export const getAllUsers = async () => {
   const response = await fetch(`${urlAdmin}/user-game`);
 
+  console.log("UserService.js_getAllUsers_response: ", response);
   return await response.json();
 };
 
@@ -14,7 +15,7 @@ export const createUser = async (data) => {
     body: JSON.stringify(data),
   });
 
-  console.log(response);
+  console.log("UserService.js_createUser_response: ", response);
 
   return await response.json();
 };
@@ -24,8 +25,11 @@ export const searchByUsername = async (searchUsername) => {
     `${urlAdmin}/user-game?username=${searchUsername}`
   );
 
-  console.log("UserService.js: ", response);
-  console.log("UserService.js: ", searchUsername);
+  console.log("UserService.js_searchByUsername_response: ", response);
+  console.log(
+    "UserService.js_searchByUsername_searchUsername: ",
+    searchUsername
+  );
 
   return await response.json();
 };
