@@ -1,9 +1,18 @@
 import React from "react";
 
-export const SearchBoard = ({ searchByUsername, onChangeSearchUsername }) => {
+export const SearchBoard = ({
+  handleOnChange,
+  searchByUsername,
+  onChangeSearchUsername,
+}) => {
   return (
     <div className="mt-5">
-      <form role="search" className="form-inline">
+      <form
+        role="search"
+        className="form-inline"
+        onSubmit={searchByUsername}
+        // onSubmit={handleOnChange}
+      >
         <div className="form-group">
           <input
             type="search"
@@ -11,14 +20,15 @@ export const SearchBoard = ({ searchByUsername, onChangeSearchUsername }) => {
             id="search"
             name="username"
             placeholder="type here..."
-            // value={searchUsername}
+            // value={value}
             // onChange={onChangeSearchUsername}
             onChange={(e) => onChangeSearchUsername(e)}
           />
         </div>
         <button
-          type="button"
-          onClick={(searchUsername) => searchByUsername(searchUsername)}
+          type="submit"
+          // type="button"
+          // onClick={(searchUsername) => searchByUsername(searchUsername)}
           className="btn btn-success ml-4"
         >
           search

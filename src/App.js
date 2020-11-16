@@ -13,12 +13,11 @@ import {
 import "./assets/scss/style.scss";
 import { UsersBySearch } from "./Components/UsersBySearch";
 
-
 class App extends Component {
   state = {
     user: {},
     users: [],
-    searchUsername: [],
+    searchUsername: "",
     numberOfUsers: 0,
   };
 
@@ -27,6 +26,7 @@ class App extends Component {
       console.log("App.js_createUser: ", response);
       this.setState({ numberOfUsers: this.state.numberOfUsers + 1 });
     });
+    e.preventDefault();
   };
 
   getAllUsers = () => {
@@ -49,16 +49,20 @@ class App extends Component {
         console.log(e);
       });
     // }
+    e.preventDefault();
   };
 
-  getAllUsersBySearch = () => {
-
-    let searchUsername = this.state.searchUsername
-
-    this.setState({searchUsername})
-
-    console.log("App.js_getAllUsersBySearch: ",searchUsername)
+  handleOnChange(e) {
+    e.preventDefault();
   }
+
+  getAllUsersBySearch = () => {
+    let searchUsername = this.state.searchUsername;
+
+    this.setState({ searchUsername });
+
+    console.log("App.js_getAllUsersBySearch: ", searchUsername);
+  };
 
   onChangeForm = (e) => {
     let user = this.state.user;
@@ -79,13 +83,22 @@ class App extends Component {
   onChangeSearchUsername = (e) => {
     let searchUsername = e.target.value;
 
+    // if (e.target.value === searchUsername) {
+    //   this.setState({
+    //     searchUsername: searchUsername,
+    //   });
+    // }
+
     if (e.target.name === "username") {
-      // e.preventDefault();
       this.setState({
         searchUsername: searchUsername,
       });
     }
+    // this.setState({
+    //   searchByUsername: e.target.value,
+    // });
 
+    // console.log("App.js_onChangeSearchUsername: ", e);
     console.log("App.js_onChangeSearchUsername: ", searchUsername);
   };
 
@@ -108,6 +121,7 @@ class App extends Component {
                 getAllUsers={this.getAllUsers}
               ></DisplayBoard>
               <SearchBoard
+                handleOnChange={this.handleOnChange}
                 onChangeSearchUsername={this.onChangeSearchUsername}
                 searchByUsername={this.searchByUsername}
               ></SearchBoard>
@@ -115,9 +129,11 @@ class App extends Component {
           </div>
         </div>
         <div className="container container-lg mt-5">
-          <Users users={this.state.users}></Users>{
-            searchByUsername() === 0 ?  null : <UsersBySearch searchUsername={this.state.searchUsername}></UsersBySearch> 
-          }
+          <Users users={this.state.users}></Users>
+
+          <UsersBySearch
+            searchUsername={this.state.searchUsername}
+          ></UsersBySearch>
         </div>
       </div>
     );

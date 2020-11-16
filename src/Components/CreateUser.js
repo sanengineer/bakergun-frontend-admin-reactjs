@@ -6,7 +6,7 @@ const CreateUser = ({ onChangeForm, createUser }) => {
       <div className="row">
         <div className="col-md-7">
           <h2>Create User</h2>
-          <form>
+          <form onSubmit={createUser}>
             <div className="row">
               <div className="form-group col-md-12">
                 <label htmlFor="exampleInputUsername">Username</label>
@@ -50,8 +50,9 @@ const CreateUser = ({ onChangeForm, createUser }) => {
               </div>
             </div>
             <button
-              type="button"
-              onClick={(e) => createUser()}
+              // type="button"
+              // onClick={(e) => createUser()}
+              type="submit"
               className="btn btn-success"
             >
               Create
