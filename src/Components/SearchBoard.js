@@ -1,9 +1,11 @@
 import React from "react";
 
 export const SearchBoard = ({
+  value,
   handleOnChange,
   searchByUsername,
   onChangeSearchUsername,
+  onChangeParams,
 }) => {
   return (
     <div className="mt-5">
@@ -20,8 +22,7 @@ export const SearchBoard = ({
             id="search"
             name="username"
             placeholder="type here..."
-            // value={value}
-            // onChange={onChangeSearchUsername}
+            // onChange={(e) => onChangeParams(e)}
             onChange={(e) => onChangeSearchUsername(e)}
           />
         </div>

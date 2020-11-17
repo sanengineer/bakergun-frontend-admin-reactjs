@@ -1,8 +1,9 @@
 import React from "react";
 
-export const UsersBySearch = ({ searchUsername }) => {
+export const UsersBySearch = ({ searchUsername, params }) => {
+  console.log("UserBySearch_params length:::", params.length);
   console.log("UserBySearch_searchUsername length:::", searchUsername.length);
-  if (searchUsername.length === 0) return null;
+  if (params.length === 0) return null;
 
   // const UserRow = (user) => {
   //   return (

@@ -19,6 +19,7 @@ class App extends Component {
     users: [],
     searchUsername: "",
     numberOfUsers: 0,
+    params: "",
   };
 
   createUser = (e) => {
@@ -37,18 +38,18 @@ class App extends Component {
   };
 
   searchByUsername = (e) => {
-    // if (e.target.value === this.state.searchUsername) {
-    searchByUsername(this.state.searchUsername)
-      .then((searchUsername) => {
-        this.setState({
-          searchUsername: this.state.searchUsername,
+    if (this.state.searchUsername) {
+      searchByUsername(this.state.searchUsername)
+        .then((searchUsername) => {
+          this.setState({
+            searchUsername: this.state.searchUsername,
+          });
+          console.log("App.js_SearchByUsername: ", searchUsername);
+        })
+        .catch((e) => {
+          console.log(e);
         });
-        console.log("App.js_SearchByUsername: ", searchUsername);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    // }
+    }
     e.preventDefault();
   };
 
@@ -102,6 +103,18 @@ class App extends Component {
     console.log("App.js_onChangeSearchUsername: ", searchUsername);
   };
 
+  onChangeParams = (e) => {
+    let params = e.target.value;
+
+    if (e.target.name === "username") {
+      this.setState({
+        params,
+      });
+    }
+
+    console.log("App.js_onChangeParams: ", params);
+  };
+
   render() {
     return (
       <div className="App">
@@ -124,6 +137,7 @@ class App extends Component {
                 handleOnChange={this.handleOnChange}
                 onChangeSearchUsername={this.onChangeSearchUsername}
                 searchByUsername={this.searchByUsername}
+                onChangeParams={this.onChangeParams}
               ></SearchBoard>
             </div>
           </div>
@@ -132,6 +146,7 @@ class App extends Component {
           <Users users={this.state.users}></Users>
 
           <UsersBySearch
+            params={this.state.params}
             searchUsername={this.state.searchUsername}
           ></UsersBySearch>
         </div>
